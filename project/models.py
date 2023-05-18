@@ -148,12 +148,12 @@ class Project(models.Model):
         help_text=_('If the research study, of which this project is part, has received funding (internal or external), please let us know by selecting the appropriate category.'),
     )
     start_date = models.DateField(
-        verbose_name=_('Start date'),
+        verbose_name=_('Start date (the date when you expect start using the system)'),
         help_text=_('Project start date. If there is likely to be a delay in starting the project, please let us know here. We will use this date as reference to contact you in case we notice the project remains inactive.'),
     )
     end_date = models.DateField(
-        verbose_name=_('End date'),
-        help_text=_('Project end date. The project will be suspended on this date preventing you from submitting further jobs to the system. Please contact us ahead of this date if you wish to renew the project.'),
+        verbose_name=_('End date (please ensure that your data is removed from the system ahead of this date)'),
+        help_text=_('Project end date. The project can be suspended from this date, preventing you from submitting further jobs to the system. Please contact us ahead of this date if you wish to renew the project.'),
     )
     economic_user = models.BooleanField(
         default=False,
@@ -209,13 +209,13 @@ class Project(models.Model):
         null=True,
         blank=False,
         verbose_name=_('Home (resilient) storage in Gigabytes'),
-        help_text=_('Home storage is long-term (although not backed up) file storage used for data you need to keep on the system for months at a time. This is subject to a quota. Enter the amount of storage you need for the longer term; 50 GBytes is the default allocation on Hawk and 100 GBytes on Sunbird.'),
+        help_text=_('Home storage is long-term file storage used for data you need to keep on the system for months at a time. This is subject to a quota. Enter the amount of storage you need for the longer term; Default storage quota: 50 GBytes on Hawk and 100 GBytes on Sunbird; Default file limit: 100 thousand files on Hawk and Sunbird. Please note that there are no backups available.'),
     )
     allocation_storage_scratch = models.PositiveIntegerField(
         null=True,
         blank=False,
         verbose_name=_('High performance transient (scratch) storage in Gigabytes'),
-        help_text=_('Scratch storage is short-term, high-performance parallel file storage used for intermediary data you need temporarily but will either delete or move off the system once it is no longer needed. There is a 3 TBytes user quota on Hawk and 20 TBytes on Sunbird. When the scratch filesystem approaches full capacity, old unused files will be deleted.'),
+        help_text=_('Scratch storage is short-term, high-performance parallel file storage used for intermediary data you need temporarily but will either delete or move off the system once it is no longer needed. Default storage quota: 3 TBytes on Hawk and 20 TBytes on Sunbird; Default file limit: 3 million files on Hawk and 10 million files on Sunbird. Please notice, when the scratch filesystem approaches full capacity, old unused files will be deleted. Please also note that there are no backups available. Please note, any data left behind in the system after the project\'s end data will be deleted. We will attempt to contact the project TL and PI but this is not guaranteed, please ensure your data is properly backed up in a suitable location off the system.'),
     )
     document = models.FileField(
         verbose_name=_('Upload Supporting Documents'),
